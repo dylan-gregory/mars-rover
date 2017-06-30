@@ -1,4 +1,5 @@
 var jQuery = require('jquery');
+var _ = require('underscore');
 
 (function($){
   "use strict";
@@ -18,166 +19,181 @@ var jQuery = require('jquery');
     RoverTwoInit[1] = Number(RoverTwoInit[1]);
     var RoverTwoMovement = $('.rov2-move').val().split('');
 
+    var Plateau = $('.plateau-coords').val().split(', ');
 
-    RoverOneMovement.map((value) => {
+    var LongestArrayLength;
 
-      if (value == 'L') {
-        if (RoverOneInit[2] == 'N') {
-          return RoverOneInit[2] = 'W';
+    if (RoverOneMovement.length >= RoverTwoMovement.length) {
+      LongestArrayLength = RoverOneMovement.length;
+    }else {
+      LongestArrayLength = RoverTwoMovement.length;
+    }
+
+
+    var MoveRovers = function(){
+
+      for (var i = 0; i < LongestArrayLength; i++) {
+
+        if (RoverOneMovement[i] == 'L') {
+          if (RoverOneInit[2] == 'N') {
+            RoverOneInit[2] = 'W';
+          }else if (RoverOneInit[2] == 'E') {
+             RoverOneInit[2] = 'N';
+
+          }else if (RoverOneInit[2] == 'S') {
+             RoverOneInit[2] = 'E';
+
+          }else if (RoverOneInit[2] == 'W') {
+             RoverOneInit[2] = 'S';
+
+          }
+
+        }
+        else if (RoverOneMovement[i] == 'R') {
+
+          if (RoverOneInit[2] == 'N') {
+             RoverOneInit[2] = 'E';
+
+          }else if (RoverOneInit[2] == 'E') {
+            return RoverOneInit[2] = 'S';
+
+          }else if (RoverOneInit[2] === 'S') {
+             RoverOneInit[2] = 'W';
+
+          }else if (RoverOneInit[2] == 'W') {
+             RoverOneInit[2] = 'N';
+
+          }
 
         }
 
-        if (RoverOneInit[2] == 'E') {
-          return RoverOneInit[2] = 'N';
+        else if (RoverOneMovement[i] == 'M') {
+
+          if ((RoverOneInit[0] > Plateau[0]) || (RoverOneInit[1] > Plateau[1])) {
+             console.log("Rover 1 fell off the plateau!");
+          }
+
+          if (RoverOneInit[2] == 'N') {
+            RoverOneInit[1] += 1;
+
+            if (RoverOneInit[1] == RoverTwoInit[1]) {
+              console.log('The rovers almost crashed! Moving Rover 1 back...');
+               RoverOneInit[1] -= 1;
+            }
+
+          }else if (RoverOneInit[2] == 'E') {
+            RoverOneInit[0] += 1;
+
+            if (RoverOneInit[0] == RoverTwoInit[0]) {
+              console.log('The rovers almost crashed! Moving Rover 1 back...');
+               RoverOneInit[0] -= 1;
+            }
+
+          }else if (RoverOneInit[2] == 'S') {
+            RoverOneInit[1] -= 1;
+
+            if (RoverOneInit[1] == RoverTwoInit[1]) {
+              console.log('The rovers almost crashed! Moving Rover 1 back...');
+               RoverOneInit[1] += 1;
+            }
+
+          }else if (RoverOneInit[2] == 'W') {
+            RoverOneInit[0] -= 1;
+
+            if (RoverOneInit[0] == RoverTwoInit[0]) {
+              console.log('The rovers almost crashed! Moving Rover 1 back...');
+               RoverOneInit[0] += 1;
+            }
+
+          }
 
         }
 
-        if (RoverOneInit[2] == 'S') {
-          return RoverOneInit[2] = 'E';
-
-        }
-
-        if (RoverOneInit[2] == 'W') {
-          return RoverOneInit[2] = 'S';
-
-        }
-
-      }
-      else if (value == 'R') {
-
-        if (RoverOneInit[2] == 'N') {
-          return RoverOneInit[2] = 'E';
-
-        }
-
-        if (RoverOneInit[2] == 'E') {
-          return RoverOneInit[2] = 'S';
-
-        }
-
-        if (RoverOneInit[2] === 'S') {
-          return RoverOneInit[2] = 'W';
-
-        }
-
-        if (RoverOneInit[2] == 'W') {
-          return RoverOneInit[2] = 'N';
-
-        }
-
-      }
-
-      else if (value == 'M') {
-
-        if (RoverOneInit[2] == 'N') {
-          return RoverOneInit[1] += 1;
-
-        }
-
-        if (RoverOneInit[2] == 'E') {
-          return RoverOneInit[0] += 1;
-
-        }
-
-        if (RoverOneInit[2] == 'S') {
-          return RoverOneInit[1] -= 1;
-
-        }
-
-        if (RoverOneInit[2] == 'W') {
-          return RoverOneInit[0] -= 1;
-
-        }
-
-      }
-
-
-
-    });
-
-
-      console.log('final', RoverOneInit);
-
-
-
-
-
-// Second Rover //
-      RoverTwoMovement.map((value) => {
-
-        if (value == 'L') {
+        if (RoverTwoMovement[i] == 'L') {
 
           if (RoverTwoInit[2] == 'N') {
-            return RoverTwoInit[2] = 'W';
+             RoverTwoInit[2] = 'W';
+          }else if (RoverTwoInit[2] == 'E') {
+             RoverTwoInit[2] = 'N';
+
+          }else if (RoverTwoInit[2] == 'S') {
+             RoverTwoInit[2] = 'E';
+
+          }else if (RoverTwoInit[2] == 'W') {
+             RoverTwoInit[2] = 'S';
+
+          }
+
+        }
+        else if (RoverTwoMovement[i] == 'R') {
+
+          if (RoverTwoInit[2] == 'N') {
+             RoverTwoInit[2] = 'E';
+
+          }else if (RoverTwoInit[2] == 'E') {
+             RoverTwoInit[2] = 'S';
+
+          }else if (RoverTwoInit[2] == 'S') {
+             RoverTwoInit[2] = 'W';
+
+          }else if (RoverTwoInit[2] == 'W') {
+             RoverTwoInit[2] = 'N';
+
+          }
+
+        }
+
+        else if (RoverTwoMovement[i] == 'M') {
+
+          if ((RoverTwoInit[0] > Plateau[0]) || (RoverOneInit[1] > Plateau[1])) {
+             console.log("Rover 2 fell off the plateau!");
+          }
+
+
+          if (RoverTwoInit[2] == 'N') {
+            RoverTwoInit[1] += 1;
+
+            if (RoverTwoInit[1] == RoverOneInit[1]) {
+              console.log('The rovers almost crashed! Moving Rover 2 back...');
+              RoverOneInit[1] -= 1;
+            }
+
           }
 
           if (RoverTwoInit[2] == 'E') {
-            return RoverTwoInit[2] = 'N';
+            RoverTwoInit[0] += 1;
+
+            if (RoverTwoInit[0] == RoverOneInit[0]) {
+              console.log('The rovers almost crashed! Moving Rover 2 back...');
+              RoverOneInit[0] -= 1;
+            }
 
           }
 
           if (RoverTwoInit[2] == 'S') {
-            return RoverTwoInit[2] = 'E';
+            RoverTwoInit[1] -= 1;
+
 
           }
 
           if (RoverTwoInit[2] == 'W') {
-            return RoverTwoInit[2] = 'S';
-
-          }
-
-        }
-        else if (value == 'R') {
-
-          if (RoverTwoInit[2] == 'N') {
-            return RoverTwoInit[2] = 'E';
-
-          }
-
-          if (RoverTwoInit[2] == 'E') {
-            return RoverTwoInit[2] = 'S';
-
-          }
-
-          if (RoverTwoInit[2] == 'S') {
-            return RoverTwoInit[2] = 'W';
-
-          }
-
-          if (RoverTwoInit[2] == 'W') {
-            return RoverTwoInit[2] = 'N';
+            RoverTwoInit[0] -= 1;
 
           }
 
         }
 
-        else if (value == 'M') {
+      }
 
-          if (RoverTwoInit[2] == 'N') {
-            return RoverTwoInit[1] += 1;
+  }
 
-          }
-
-          if (RoverTwoInit[2] == 'E') {
-            return RoverTwoInit[0] += 1;
-
-          }
-
-          if (RoverTwoInit[2] == 'S') {
-            return RoverTwoInit[1] -= 1;
-
-          }
-
-          if (RoverTwoInit[2] == 'W') {
-            return RoverTwoInit[0] -= 1;
-
-          }
-
-        }
+  MoveRovers();
 
 
-      });
-      console.log('final 2', RoverTwoInit);
+      console.log('Rover 1 ended at:', RoverOneInit);
+
+      console.log('Rover 2 ended at:', RoverTwoInit);
+
 
 
   });

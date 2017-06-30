@@ -14,6 +14,8 @@
     "parallelshell": "^2.0.0",
     "imagemin-cli": "^2.1.0",
     "browserify": "^12.0.0",
+    "mocha": "^3.2.0",
+    "chai": "^3.5.0",
     "eslint-plugin-react": "^4.0.0",
     "watchify": "^3.7.0",
     "strictify": "^0.2.0",
@@ -22,12 +24,12 @@
     "jquery": "^2.2.0",
     "underscore": "^1.8.3"
     , "bootstrap-sass": "^3.3.6"
-    
+
     , "handlebars": "^4.0.5"
     , "hbsfy": "^2.5.1"
-    
-    
-    
+
+
+
   },
   "scripts": {
     "html": "cp app/*.html dist/",
@@ -60,7 +62,7 @@
     "transform": [
       "browserify-shim",
       "hbsfy",
-      
+
       "strictify"
     ]
   },
