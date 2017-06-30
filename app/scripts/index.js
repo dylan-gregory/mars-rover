@@ -30,7 +30,7 @@ var _ = require('underscore');
     }
 
 
-    var MoveRovers = function(){
+    var moveRovers = function(){
 
       for (var i = 0; i < LongestArrayLength; i++) {
 
@@ -187,7 +187,7 @@ var _ = require('underscore');
 
   }
 
-  MoveRovers();
+  moveRovers();
 
 
       console.log('Rover 1 ended at:', RoverOneInit);
